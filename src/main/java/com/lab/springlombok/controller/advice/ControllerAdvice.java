@@ -1,13 +1,13 @@
 package com.lab.springlombok.controller.advice;
 
 import com.lab.springlombok.exceptions.EntityNotFoundException;
+import com.lab.springlombok.exceptions.ExceptionsBag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.validation.ConstraintDeclarationException;
 import javax.validation.ConstraintViolationException;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,4 +28,16 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
                 .collect(Collectors.toSet());
         return new ResponseEntity<>(violations, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ExceptionsBag.class)
+    public final ResponseEntity<Object> handleEntityNotFoundException(ExceptionsBag ex, WebRequest request){
+        Set<String> exceptions = ex
+                .getExceptions()
+                .stream()
+                .map(EntityNotFoundException::getMessage)
+                .collect(Collectors.toSet());
+        ex.clear();
+        return new ResponseEntity<>(exceptions, HttpStatus.NOT_FOUND);
+    }
+
 }

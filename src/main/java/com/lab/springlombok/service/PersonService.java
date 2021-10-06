@@ -2,6 +2,7 @@ package com.lab.springlombok.service;
 
 import com.lab.springlombok.domain.Person;
 import com.lab.springlombok.exceptions.EntityNotFoundException;
+import com.lab.springlombok.exceptions.ExceptionsBag;
 
 public interface PersonService {
     Person save(String name);
@@ -10,5 +11,5 @@ public interface PersonService {
 
     Person findById(Long id) throws EntityNotFoundException;
 
-    Person addCar(Long personId, Long carId) throws EntityNotFoundException;
+    Person addCar(Long personId, Long carId) throws EntityNotFoundException, ExceptionsBag;
 }

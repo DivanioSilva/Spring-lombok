@@ -1,6 +1,8 @@
 package com.lab.springlombok.controller;
 
 import com.lab.springlombok.domain.Person;
+import com.lab.springlombok.exceptions.EntityNotFoundException;
+import com.lab.springlombok.exceptions.ExceptionsBag;
 import com.lab.springlombok.service.PersonService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
@@ -29,5 +31,10 @@ public class PersonController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Person saveFullPerson(@RequestBody Person person){
         return this.personService.save(person);
+    }
+
+    @RequestMapping(value = "/{personId}/car/{carId}", method = RequestMethod.PUT)
+    public Person addCar(@RequestParam("personId") Long personId, @RequestParam("carId") Long carId) throws ExceptionsBag, EntityNotFoundException {
+        return this.personService.addCar(personId, carId);
     }
 }
