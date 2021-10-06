@@ -3,12 +3,14 @@ package com.lab.springlombok.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Entity
 public class Person {
@@ -21,10 +23,18 @@ public class Person {
     @NotBlank(message = "is mandatory")
     private String lastname;
     @NotBlank(message = "is mandatory")
+    @Email(message = "malformed email")
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "car_id")
-    private Car car;
+    private List<Car> cars;
 
+    public Person() {
+        cars = new ArrayList<>();
+    }
+
+    public void addCar(Car car) {
+        this.cars.add(car);
+    }
 }

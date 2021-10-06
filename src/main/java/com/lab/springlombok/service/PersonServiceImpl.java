@@ -9,6 +9,7 @@ import com.lab.springlombok.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -66,8 +67,13 @@ public class PersonServiceImpl implements PersonService {
         Person person = optionalPerson.get();
         Car car = optionalCar.get();
 
-        person.setCar(car);
+        person.addCar(car);
 
         return personRepository.save(person);
+    }
+
+    @Override
+    public List<Person> findAll() {
+        return this.personRepository.findAll();
     }
 }
