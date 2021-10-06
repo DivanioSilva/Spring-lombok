@@ -26,6 +26,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person save(Person person) {
+        return this.personRepository.save(person);
+    }
+
+    @Override
     public Person findById(final Long id) throws EntityNotFoundException {
         return this.personRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("I cannot find this person"));

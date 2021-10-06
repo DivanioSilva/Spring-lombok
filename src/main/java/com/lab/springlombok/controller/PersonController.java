@@ -23,4 +23,11 @@ public class PersonController {
         log.error("----> {} ", name);
         return personService.save(name);
     }
+
+    @RequestMapping(value = "/full", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Person saveFullPerson(@RequestBody Person person){
+        return this.personService.save(person);
+    }
 }
