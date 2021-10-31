@@ -2,6 +2,7 @@ package com.lab.springlombok.service;
 
 import com.lab.springlombok.domain.Person;
 import com.lab.springlombok.dto.PersonDto;
+import com.lab.springlombok.dto.PersonWithNoCarsDto;
 import com.lab.springlombok.exceptions.EntityNotFoundException;
 import com.lab.springlombok.exceptions.ExceptionsBag;
 
@@ -9,6 +10,8 @@ import java.util.List;
 
 public interface PersonService {
     PersonDto save(String name);
+
+    PersonDto save(PersonWithNoCarsDto personDto);
 
     PersonDto save(PersonDto personDto);
 

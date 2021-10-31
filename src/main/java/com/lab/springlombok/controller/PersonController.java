@@ -2,6 +2,7 @@ package com.lab.springlombok.controller;
 
 import com.lab.springlombok.domain.Person;
 import com.lab.springlombok.dto.PersonDto;
+import com.lab.springlombok.dto.PersonWithNoCarsDto;
 import com.lab.springlombok.service.PersonService;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -22,9 +23,9 @@ public class PersonController {
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonDto save(@RequestParam String name){
-        log.error("----> {} ", name);
-        return personService.save(name);
+    public PersonDto save(@RequestBody PersonWithNoCarsDto personWithNoCarsDto){
+        log.error("----> {} ", personWithNoCarsDto);
+        return personService.save(personWithNoCarsDto);
     }
 
     @PostMapping(value = "/full", consumes = MediaType.APPLICATION_JSON_VALUE,

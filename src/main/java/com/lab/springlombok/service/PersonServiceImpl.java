@@ -3,6 +3,7 @@ package com.lab.springlombok.service;
 import com.lab.springlombok.domain.Car;
 import com.lab.springlombok.domain.Person;
 import com.lab.springlombok.dto.PersonDto;
+import com.lab.springlombok.dto.PersonWithNoCarsDto;
 import com.lab.springlombok.exceptions.EntityNotFoundException;
 import com.lab.springlombok.exceptions.ExceptionsBag;
 import com.lab.springlombok.mapper.PersonMapper;
@@ -36,6 +37,12 @@ public class PersonServiceImpl implements PersonService {
     public PersonDto save(final String name){
         Person person = Person.builder().name(name).build();
         return this.personMapper.personToPersonDTO(this.personRepository.save(person));
+    }
+
+    @Override
+    public PersonDto save(PersonWithNoCarsDto personDto) {
+        Person person = this.personRepository.save(this.personMapper.personWithNoCarsDtoToPerson(personDto));
+        return this.personMapper.personToPersonDTO(person);
     }
 
     @Override
