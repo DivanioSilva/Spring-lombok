@@ -1,6 +1,7 @@
 package com.lab.springlombok.controller;
 
 import com.lab.springlombok.domain.Person;
+import com.lab.springlombok.dto.PersonDto;
 import com.lab.springlombok.service.PersonService;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -21,32 +22,32 @@ public class PersonController {
     }
 
     @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person save(@RequestParam String name){
+    public PersonDto save(@RequestParam String name){
         log.error("----> {} ", name);
         return personService.save(name);
     }
 
     @PostMapping(value = "/full", consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person saveFullPerson(@RequestBody Person person){
-        return this.personService.save(person);
+    public PersonDto saveFullPerson(@RequestBody PersonDto personDto){
+        return this.personService.save(personDto);
     }
 
     @SneakyThrows
     @PutMapping(value = "/{personId}/car/{carId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person addCar(@PathVariable("personId") Long personId, @PathVariable("carId") Long carId) {
+    public PersonDto addCar(@PathVariable("personId") Long personId, @PathVariable("carId") Long carId) {
         return this.personService.addCar(personId, carId);
     }
 
     @SneakyThrows
     @GetMapping(value = "/{personId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById(@PathVariable Long personId) {
+    public PersonDto findById(@PathVariable Long personId) {
         return this.personService.findById(personId);
     }
 
     @SneakyThrows
     @GetMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findAll() {
+    public List<PersonDto> findAll() {
         return this.personService.findAll();
     }
 }

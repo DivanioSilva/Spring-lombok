@@ -1,19 +1,20 @@
 package com.lab.springlombok.service;
 
 import com.lab.springlombok.domain.Person;
+import com.lab.springlombok.dto.PersonDto;
 import com.lab.springlombok.exceptions.EntityNotFoundException;
 import com.lab.springlombok.exceptions.ExceptionsBag;
 
 import java.util.List;
 
 public interface PersonService {
-    Person save(String name);
+    PersonDto save(String name);
 
-    Person save(Person person);
+    PersonDto save(PersonDto personDto);
 
-    Person findById(Long id) throws EntityNotFoundException;
+    PersonDto findById(Long id) throws EntityNotFoundException, ExceptionsBag;
 
-    Person addCar(Long personId, Long carId) throws EntityNotFoundException, ExceptionsBag;
+    PersonDto addCar(Long personId, Long carId) throws EntityNotFoundException, ExceptionsBag;
 
-    List<Person> findAll();
+    List<PersonDto> findAll();
 }
