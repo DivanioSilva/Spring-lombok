@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -22,4 +23,7 @@ public @Data class Car {
     @JoinColumn(name = "person_id")
     private Person person;
 
+    public void addPerson(Person person) {
+        Optional.of(person).ifPresent(c -> this.person = c);
+    }
 }

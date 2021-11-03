@@ -1,12 +1,15 @@
 package com.lab.springlombok.domain;
 
 import lombok.*;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -35,6 +38,6 @@ public class Person {
     }
 
     public void addCar(Car car) {
-        this.cars.add(car);
+        Optional.of(car).ifPresent(c -> this.cars.add(c));
     }
 }
